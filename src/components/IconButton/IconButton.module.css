@@ -1,0 +1,13 @@
+.iconButton {
+  margin: 0;
+  padding: 10px;
+  border: none;
+  border-radius: 25%;
+  color: white;
+  background-color: brown;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

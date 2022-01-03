@@ -1,0 +1,25 @@
+.title {
+  color: black;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.text {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.input {
+  height: 30px;
+}
+.button {
+  height: 50px;
+  background-color: rgb(230, 122, 240);
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}

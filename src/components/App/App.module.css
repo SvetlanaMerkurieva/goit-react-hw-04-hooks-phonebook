@@ -1,0 +1,27 @@
+.app {
+  text-align: center;
+}
+
+.appHeader {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+.title {
+  color: black;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.text {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  text-align: left;
+}
