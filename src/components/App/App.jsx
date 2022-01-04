@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import shortid from 'shortid';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { Filter } from '../Filter/Filter';
@@ -6,10 +6,16 @@ import { ContactList } from '../ContactList/ContactList';
 import s from './App.module.css';
 
 export default function App() {
-  const [contacts, setContacts] = useState([]);
+  const localStorageKey = 'contacts';
+
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(localStorage.getItem(localStorageKey)) ?? [];
+  });
   const [filter, setFilter] = useState('');
 
-  /*const localstorageKey = 'contacts';*/
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, JSON.stringify(contacts));
+  }, [contacts]);
 
   const handleFormSubmit = data => {
     const isContact = contacts.find(({ name }) => name === data.name);
@@ -23,28 +29,26 @@ export default function App() {
         number: data.number,
       };
 
-      setContacts(prevState => ({ ...prevState.contacts, contact }));
+      setContacts(prevState => [...prevState, contact]);
     }
   };
 
   const deleteContact = contactId => {
-    setContacts(prevState => ({
-      ...prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
+    setContacts(prevState => {
+      return prevState.filter(contact => contact.id !== contactId);
+    });
   };
 
   const changeFilter = ({ target: { value: filter } }) => {
     setFilter(filter);
   };
 
-  const getVisibleContact = (contacts, filter) => {
+  const getVisibleContact = () => {
     const normalValueFilter = filter.toLowerCase();
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalValueFilter),
     );
   };
-
-  const visibleContacts = getVisibleContact();
 
   return (
     <div className={s.app}>
@@ -54,7 +58,7 @@ export default function App() {
         <h3 className={s.title}>Контакты</h3>
         <Filter value={filter} onChange={changeFilter} />
         <ContactList
-          contacts={visibleContacts}
+          contacts={getVisibleContact()}
           onDeleteContact={deleteContact}
         />
       </header>
