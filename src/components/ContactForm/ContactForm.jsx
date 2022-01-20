@@ -6,16 +6,7 @@ export const ContactForm = ({ onSubmit }) => {
   const [number, setNumber] = useState('');
 
   const handleInputChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return;
-    }
+    name === 'name' ? setName(value) : setNumber(value);
   };
 
   const handleSubmit = e => {
